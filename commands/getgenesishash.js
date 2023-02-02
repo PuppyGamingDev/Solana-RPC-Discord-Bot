@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const { PublicKey } = require('@solana/web3.js')
 
 module.exports = {
