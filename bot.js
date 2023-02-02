@@ -48,5 +48,3 @@ client.on('interactionCreate', async interaction => {
 });
 // Logs the bot in using the Bot Token
 client.login(process.env.TOKEN);
-
-connection.get
