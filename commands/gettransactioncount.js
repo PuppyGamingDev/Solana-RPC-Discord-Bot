@@ -3,18 +3,13 @@ const { PublicKey } = require('@solana/web3.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("getsignaturesforaddress")
-        .setDescription("Returns confirmed signatures for transactions involving an address backwards in time")
-        .addStringOption(option => option
-            .setName('address')
-            .setDescription('Address of account to query')
-            .setRequired(true))
+        .setName("gettransactioncount")
+        .setDescription("Fetch the current transaction count of the cluster")
         .setDMPermission(false),
     async execute(interaction, client, connection) {
         await interaction.deferReply()
         try {
-            const pubKey = new PublicKey(interaction.options.getString('address'))
-            const response = await connection.getSignaturesForAddress(pubKey)
+            const response = await connection.getTransactionCount()
             if (JSON.stringify(response, null, 2).length > 2000) {
                 const attachment = new AttachmentBuilder(Buffer.from(JSON.stringify(response, null, 2), 'utf-8'), { name: 'response.txt' })
                 await interaction.editReply({content: `Response too long so now it's attached`, files: [attachment]})
